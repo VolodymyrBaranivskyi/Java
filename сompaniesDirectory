@@ -27,3 +27,96 @@ CREATE TABLE IF NOT EXISTS Headquarters (
   UNIQUE INDEX headquarters_id_UNIQUE (headquarters_id ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS Company (
+  company_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(45) NULL DEFAULT NULL,
+  type VARCHAR(45) NULL DEFAULT NULL,
+  chiefExecutiveOfficer VARCHAR(45) NULL DEFAULT NULL,
+  branch VARCHAR(45) NULL DEFAULT NULL,
+  numberOfWorkers INT(11) NULL DEFAULT NULL,
+  site VARCHAR(45) NULL DEFAULT NULL,
+  earnings INT(11) NULL DEFAULT NULL,
+  stockPrice DOUBLE NULL DEFAULT NULL,
+  headquarters_id INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (company_id, headquarters_id),
+  INDEX fk_Company_Headquarters1_idx (headquarters_id ASC),
+  UNIQUE INDEX company_id_UNIQUE (company_id ASC),
+  CONSTRAINT fk_Company_Headquarters1
+    FOREIGN KEY (headquarters_id)
+    REFERENCES Headquarters (`headquarters_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS CompanyWorker (
+  worker_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  currentProject VARCHAR(45) NULL DEFAULT NULL,
+  pastProjects VARCHAR(45) NULL DEFAULT NULL,
+  yearsOfExperience INT(11) NULL DEFAULT NULL,
+  salary DOUBLE NULL DEFAULT NULL,
+  company_id INT(10) UNSIGNED NOT NULL,
+  cv_id INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (worker_id, company_id, cv_id),
+  INDEX fk_CompanyWorker_Company1_idx (company_id ASC),
+  INDEX fk_CompanyWorker_CV1_idx (cv_id ASC),
+  UNIQUE INDEX worker_id_UNIQUE (worker_id ASC),
+  CONSTRAINT fk_CompanyWorker_Company1
+    FOREIGN KEY (company_id)
+    REFERENCES Company (company_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_CompanyWorker_CV1
+    FOREIGN KEY (cv_id)
+    REFERENCES CV (cv_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+CREATE TABLE IF NOT EXISTS Investor_Company (
+  investor_id INT(11) NOT NULL,
+  company_id INT(11) NOT NULL,
+  PRIMARY KEY (investor_id, company_id),
+  INDEX fk_Investor_Company_Investor_idx (investor_id ASC),
+  INDEX fk_Investor_Company_Company2_idx (company_id ASC),
+  CONSTRAINT fk_Investor_Company_Investor
+    FOREIGN KEY (investor_id)
+    REFERENCES Quarters (quarters_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_Investor_Company_Company2
+    FOREIGN KEY (company_id)
+    REFERENCES Company (company_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS Quarters (
+  quarters_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  stockOrFactory VARCHAR(45) NULL DEFAULT NULL,
+  numberOfCars INT(11) NULL DEFAULT NULL,
+  leader VARCHAR(45) NULL DEFAULT NULL,
+  telephone VARCHAR(45) NULL DEFAULT NULL,
+  address VARCHAR(45) NULL DEFAULT NULL,
+  email VARCHAR(45) NULL DEFAULT NULL,
+  company_id INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (quarters_id, company_id),
+  INDEX fk_Quarters_Company1_idx (company_id ASC),
+  UNIQUE INDEX quarters_id_UNIQUE (quarters_id ASC),
+  CONSTRAINT fk_Quarters_Company1
+    FOREIGN KEY (company_id)
+    REFERENCES Company (company_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+
+
+
+
