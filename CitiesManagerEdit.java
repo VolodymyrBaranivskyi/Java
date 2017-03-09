@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class CitiesManagerEdit {
 
     ArrayList<Cities> list;
-    private String[] branches;
     private int idCity;
 
     private Cities city;
@@ -36,30 +35,15 @@ public class CitiesManagerEdit {
         return city1;
     }
 
-    public String getCompanyContentPage(int id){
-        this.idCity=id;
-        return "pageCompanyContent?faces-redirect=true";
-    }
 
-    public ArrayList<Cities> getCompaniesBYBranch() {
-        String sqlStr = "SELECT o FROM com.vinterle.servlet.Company o WHERE o.branch IN (";
-        sqlStr += "'" + branches[0] + "'";
-        for (int i = 1; i < branches.length; ++i) {
-            sqlStr += ", '" + branches[i] + "'";
-        }
-        sqlStr += ")";
-        list = cityDAO.searchCitiesWithCheckboxes(sqlStr);
-
-        return list;
-    }
-    public ArrayList<Cities> getAllCompanies() {
+    public ArrayList<Cities> getAllCities() {
         list = cityDAO.searchAllCities();
         return list;
     }
 
 
     public String redirectToResultSearchCityById(){
-        return "resultSearchCitById?faces-redirect=true";
+        return "resultSearchCityById?faces-redirect=true";
     }
 
     public void setList(ArrayList<Cities> list) {
@@ -99,6 +83,13 @@ public class CitiesManagerEdit {
     }
 
 }
+
+
+
+
+
+
+
 
 
 
