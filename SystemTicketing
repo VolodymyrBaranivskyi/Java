@@ -1,1 +1,68 @@
+<-- SystemTicketing.db -->
+create database Airport;
+show databases;
+use airport;
+CREATE TABLE  Cities (
+        city_id  INT AUTO_INCREMENT NOT NULL,
+        cityName  NVARCHAR(40),
+        PRIMARY KEY(city_id )
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
 
+CREATE TABLE  Companies(
+        company_id  INT AUTO_INCREMENT NOT NULL,
+        companyName  NVARCHAR(40),
+        PRIMARY KEY(company_id  )
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
+
+
+CREATE TABLE Users (
+        user_id  INT AUTO_INCREMENT NOT NULL,
+        UserLogin  NVARCHAR(20) NOT NULL,
+        Password NVARCHAR(20) NOT NULL,
+        Email  NVARCHAR(50),
+        PRIMARY KEY(user_id)
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
+
+
+CREATE TABLE Aircraft(
+        aircraft_id INT AUTO_INCREMENT NOT NULL,
+        aircraftModel  NVARCHAR(40) NOT NULL,
+        Count1 INT,
+Count2 INT,
+        PRIMARY KEY(aircraft_id)
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
+
+
+CREATE TABLE Flights(
+        flight_id  INT AUTO_INCREMENT NOT NULL,
+        dateDeparture  DATETIME,
+        dateArrival  DATETIME,
+        price1 DECIMAL(18, 0),
+        price2 DECIMAL(18, 0),
+        company_id INT, 
+        aircraft_id INT,
+        cityDeparture_id INT,
+        cityArrival_id INT,
+        PRIMARY KEY(flight_id ),
+        FOREIGN KEY (company_id) REFERENCES Companies(company_id),
+        FOREIGN KEY (cityArrival_id) REFERENCES Cities(city_id),
+        FOREIGN KEY (cityDeparture_id) REFERENCES Cities(city_id),
+        FOREIGN KEY (aircraft_id) REFERENCES Aircraft(aircraft_id)
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
+
+
+CREATE TABLE Orders (
+        order_id  INT AUTO_INCREMENT NOT NULL,
+        user_id  INT  ,
+        CreditCard  VARCHAR(50),
+        flight_id INT,
+        number1cl INT,
+        number2cl INT,
+        PRIMARY KEY(order_id),
+        FOREIGN KEY (user_id) REFERENCES Users(user_id)
+        ON UPDATE CASCADE
+          ON DELETE RESTRICT,
+        FOREIGN KEY (flight_id) REFERENCES Flights(flight_id)
+        ON UPDATE CASCADE
+          ON DELETE RESTRICT
+         ) ENGINE=InnoDB CHARACTER SET=UTF8;
