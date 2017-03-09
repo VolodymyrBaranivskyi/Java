@@ -1,8 +1,12 @@
+import javax.faces.bean.ManagedBean;
+import javax.persistence.*;
 
 public class Cities {
-
+	@Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "city_id")
 	private int city_id;
-
+	@Column(name = "name")
 	private String name;
 
 	public Cities(int city_id, String name) {
