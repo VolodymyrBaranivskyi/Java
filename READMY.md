@@ -2,8 +2,10 @@
 | [English](README.md) | [Русский](README.ru.md) |
 
 <<<<<<< HEAD
-### Use snake_case when naming symbols, methods, and variables. But its not Java language
+### Use snake_case when naming symbols, methods, and variables. But its not Java languagesdvsdvsd
+###sdfsdf
 ```Ruby
+###gdfg
 #badly
 : 'Some symbol'
 : SomeSymbol
