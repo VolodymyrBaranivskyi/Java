@@ -1,8 +1,8 @@
-# Code Style and Conventions
+# Code Style and Conventions 
 | [English](README.md) | [Русский](README.ru.md) |
 
+<<<<<<< HEAD
 ### Use snake_case when naming symbols, methods, and variables. But its not Java language
-
 ```Ruby
 #badly
 : 'Some symbol'
