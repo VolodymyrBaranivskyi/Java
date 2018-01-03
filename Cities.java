@@ -9,7 +9,7 @@ public class Cities {
 	@Column(name = "name")
 	private String name;
 
-	public Cities(int city_id, String name) {
+	public Cities(int city_id, String name) {//constructor with parameters
 		this.city_id = city_id;
 		this.name = name;
 	}
